@@ -6,6 +6,7 @@ body{
     margin:0;
     padding:0;
     overflow:hidden;
+    font-family:'Segoe UI', sans-serif;
 }
 #canvas-container{
     width:100vw;
@@ -42,6 +43,12 @@ circle:active{
     transition: max-height 0.2s ease, width 0.3s ease, padding 0.3s ease;
     overflow: hidden;
     max-height:100vh;
+    font-family:sans-serif;
+    font-weight: 600;
+}
+.slider-input{
+    font-family:inherit;
+    font-weight: inherit;
 }
 #slider-container.minimized{
     padding:0;
@@ -61,6 +68,8 @@ circle:active{
     border-radius: 0.5rem;
     border: none;
     white-space: nowrap;
+    font-family:inherit;
+    font-weight: inherit;
 }
 #min-btn{
     position:absolute;
@@ -73,7 +82,6 @@ circle:active{
     width:1.5rem;
     height:1.5rem;
     transition: border-radius 0.3s ease;
-    font-family:  'Segoe UI Symbol', 'Noto Sans Symbols', Arial, sans-serif;
 }
 #min-btn.minimized{
     border-radius:0.3rem;
@@ -97,6 +105,10 @@ circle:active{
     display:flex;
     align-items: center;
     width:100%;
+    gap:0.5rem;
+}
+.slider-label>input{
+    line-height:1;
 }
 .slider-group{
     display:flex;

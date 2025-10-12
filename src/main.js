@@ -209,7 +209,7 @@ render();
 const sliderContent = document.getElementById("slider-content")
 function createSlider(sliderDeets){
     const sliderValue = uniforms[sliderDeets.key].value;
-    const labelText = document.createElement("span");
+    const labelText = document.createElement("label");
     labelText.innerText = sliderDeets.name + ":";
     labelText.className = "slider-text";
 
