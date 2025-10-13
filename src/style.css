@@ -7,6 +7,8 @@ body{
     padding:0;
     overflow:hidden;
     font-family:'Segoe UI', sans-serif;
+    font-weight: bold;
+
 }
 #canvas-container{
     width:100vw;
@@ -26,9 +28,32 @@ body{
 }
 circle{
     cursor:grab;
+    r:15;
+    stroke:white;
+    stroke-width: 5px;
+    opacity: 0.9;
 }
 circle:active{
     cursor:grabbing;
+}
+.grid-label{
+    fill:white;
+    stroke:black;
+    stroke-width:3px;
+    paint-order: stroke;
+    font-size: 1.5rem;
+}
+path, line {
+    stroke:white;
+    stroke-width: 2px;
+}
+text {
+    color:white;
+    user-select: none;
+    font-weight: normal;
+}
+.slider {
+    cursor:pointer;
 }
 #slider-container{
     position:absolute;
@@ -43,12 +68,11 @@ circle:active{
     transition: max-height 0.2s ease, width 0.3s ease, padding 0.3s ease;
     overflow: hidden;
     max-height:100vh;
-    font-family:sans-serif;
-    font-weight: 600;
+    font: inherit;
+    user-select: none;
 }
 .slider-input{
-    font-family:inherit;
-    font-weight: inherit;
+    font:inherit;
 }
 #slider-container.minimized{
     padding:0;
@@ -59,17 +83,22 @@ circle:active{
     display: flex;
     flex-direction: column;
     gap:0.5rem;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
 }
 
 #slider-content>button{
     width:100%;
-    font-size: 1.1rem;
     border-radius: 0.5rem;
     border: none;
     white-space: nowrap;
-    font-family:inherit;
-    font-weight: inherit;
+    font:inherit;
+    padding:0.1rem;
+}
+button{
+    cursor:pointer;
+}
+button:hover{
+    filter: brightness(90%);
 }
 #min-btn{
     position:absolute;
@@ -82,6 +111,7 @@ circle:active{
     width:1.5rem;
     height:1.5rem;
     transition: border-radius 0.3s ease;
+    font:inherit;
 }
 #min-btn.minimized{
     border-radius:0.3rem;
@@ -98,7 +128,7 @@ circle:active{
     outline: none;
     background: transparent;
     color:white;
-    font-size: 1.5rem;
+    font:inherit;
     padding:0;
 }
 .slider-label{
@@ -109,28 +139,9 @@ circle:active{
 }
 .slider-label>input{
     line-height:1;
+    font:inherit;
 }
 .slider-group{
     display:flex;
     flex-direction: column;
-}
-path, line {
-    stroke:white;
-    stroke-width: 2px;
-}
-text {
-    color:white
-}
-.grid-label{
-    fill:white;
-    stroke:black;
-    stroke-width:3px;
-    paint-order: stroke;
-    font-size: 1.5rem;
-}
-circle{
-    r:15;
-    stroke:white;
-    stroke-width: 5px;
-    opacity: 0.9;
 }
