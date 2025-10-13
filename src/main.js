@@ -7,6 +7,7 @@ import initZoom from "./zoom"
 import initSliders from "./sliders"
 import initButtons from "./buttons"
 import initMinimize from "./minimize"
+import initTraj from "./traj"
 
 const canvas = document.getElementById("webgl-canvas")
 canvas.width = canvas.clientWidth;
@@ -18,24 +19,27 @@ const svg = d3.select("#cursor-svg");
 
 let drawState = {
     drawGrid:true,
-    drawCursor:true
+    drawCursor:true,
+    drawTraj:false
 }
 
 const renderGl = initGl(canvas, uniforms);
 const renderGrid = initGrid(canvas,svg, drawState);
-const [renderCursors, cursorGroup] = initCursors(svg, renderGl, drawState);
+
+const renderTraj = initTraj(svg, drawState)
+const [renderCursors, cursorGroup] = initCursors(svg, renderGl, renderTraj, drawState);
+
+const backgroundBehaviour = initZoom(canvas, svg, uniforms, zoomSize, renderGrid, renderGl, renderTraj);
 
 function render(){
+    renderGl();
+    renderTraj();
     renderGrid();
     renderCursors();
-    renderGl();
 }
-
-const backgroundBehaviour = initZoom(canvas, svg, uniforms, zoomSize, renderGrid, renderGl);
-
 render();
 
 const sliderContent = document.getElementById("slider-content")
 initSliders(canvas, uniforms, sliderContent, render, renderCursors, cursorGroup);
-initButtons(canvas, svg, uniforms, sliderContent, render, renderGl, backgroundBehaviour, cursorGroup, drawState)
-initMinimize(sliderContent)
+initButtons(canvas, svg, uniforms, sliderContent, render, renderGl, renderTraj, backgroundBehaviour, cursorGroup, drawState);
+initMinimize(sliderContent);

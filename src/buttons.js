@@ -1,7 +1,7 @@
 import { easeExpOut, zoomIdentity, interpolateArray } from "d3"
 import { circleComplex, cursorColors} from "./funcUtils"
 import { complexToCanvas } from "./state"
-export default function initButtons(canvas, svg, uniforms, sliderContent, render, renderGl, backgroundBehaviour, cursorGroup, drawState){
+export default function initButtons(canvas, svg, uniforms, sliderContent, render, renderGl, renderTraj, backgroundBehaviour, cursorGroup, drawState){
     function createButton(text, eventListener){
         const btn = document.createElement("button")
         btn.innerText = text
@@ -16,6 +16,11 @@ export default function initButtons(canvas, svg, uniforms, sliderContent, render
     createButton("Hide Roots",function(){
         drawState.drawCursor = !drawState.drawCursor;
         this.innerText = drawState.drawCursor? "Hide Roots":"Show Roots";
+        render();
+    })
+    createButton("Show Path",function(){
+        drawState.drawTraj = !drawState.drawTraj;
+        this.innerText = drawState.drawTraj? "Hide Path":"Show Path";
         render();
     })
     createButton("Go to Origin",()=>{
@@ -35,6 +40,7 @@ export default function initButtons(canvas, svg, uniforms, sliderContent, render
                         .attr("fill", (_, i)=>cursorColors[i])
                         .attr("cx", d=>complexToCanvas(d)[0])
                         .attr("cy", d=>complexToCanvas(d)[1])
+                    renderTraj();
                     renderGl();
                 }
             })

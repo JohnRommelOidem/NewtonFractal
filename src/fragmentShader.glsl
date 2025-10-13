@@ -19,25 +19,24 @@ vec2 complexDiv(vec2 z1, vec2 z2){
     return vec2((z1.x*z2.x+z1.y*z2.y)/dot(z2, z2), (-z1.x*z2.y+z1.y*z2.x)/dot(z2, z2));
 }
 
-vec2 f(vec2 z){
+vec2 complexReciprocal(vec2 z){
+    return vec2(z.x,-z.y)/dot(z,z);
+}
+
+vec2 fOverFPrime(vec2 z){
     vec2 result = vec2(1.0, 0.0);
+    vec2 deriv = vec2(0.0);
     for (int i=0;i<u_numRoots;i++){
         result = complexMult(result,z-u_roots[i]);
-    }
-    return result;
-}
-vec2 fPrime(vec2 z){
-    vec2 result = vec2(0.0);
-    for (int i=0;i<u_numRoots;i++){
         vec2 term = vec2(1.0, 0.0);
         for (int j=0;j<u_numRoots;j++){
             if (i!=j){
                 term = complexMult(term,z-u_roots[j]);
             }
         }
-        result += term;
+        deriv += term;
     }
-    return result;
+    return complexDiv(result, deriv);
 }
 
 void main(){
@@ -46,7 +45,7 @@ void main(){
     int iterCount = 0;
     vec2 zNext = vec2(0.0);
     for(int i=0;i<u_iterations;i++){
-        zNext = z - complexDiv(f(z),fPrime(z));
+        zNext = z - fOverFPrime(z);
         if (length(zNext-z)<1e-6) break;
         z = zNext;
         iterCount = i;

@@ -2,10 +2,9 @@ import {zoom, interpolate, zoomIdentity} from "d3"
 import { minDimension } from "./funcUtils";
 import { complexToCanvas } from "./state";
 
-export default function initZoom(canvas, svg, uniforms, zoomSize, renderGrid, renderGl){
+export default function initZoom(canvas, svg, uniforms, zoomSize, renderGrid, renderGl, renderTraj){
     const backgroundBehaviour = zoom()
         .interpolate(interpolate)
-        .scaleExtent([0.000001, 20000])
         .on("zoom", (e)=>{
             const x = (canvas.width/2-e.transform.x)/minDimension(canvas);
             const y = (e.transform.y-canvas.height/2)/minDimension(canvas);
@@ -14,7 +13,8 @@ export default function initZoom(canvas, svg, uniforms, zoomSize, renderGrid, re
             uniforms.u_zoomCenter.value[1] = y * uniforms.u_zoomSize.value;
 
             renderGrid();
-            svg.selectAll("circle")    
+            renderTraj();
+            svg.selectAll("circle")
                 .attr("cx", (d)=>complexToCanvas(d)[0])
                 .attr("cy", (d)=>complexToCanvas(d)[1])
             renderGl();
