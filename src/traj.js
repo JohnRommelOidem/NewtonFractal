@@ -23,6 +23,13 @@ function complexDiv(z1, z2){
         (z1[1]*z2[0]-z1[0]*z2[1])/denominator
     ]
 }
+function complexReciprocal(z2){
+    const denominator = z2[0]**2+z2[1]**2;
+    return [
+        (z1[0]*z2[0]+z1[1]*z2[1])/denominator, 
+        (z1[1]*z2[0]-z1[0]*z2[1])/denominator
+    ]
+}
 
 function fOverFPrime(z, roots = uniforms.u_roots.value){
     let result = [1,0];

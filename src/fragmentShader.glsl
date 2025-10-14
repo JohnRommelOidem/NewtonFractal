@@ -24,35 +24,31 @@ vec2 complexReciprocal(vec2 z){
 }
 
 vec2 fOverFPrime(vec2 z){
-    vec2 result = vec2(1.0, 0.0);
-    vec2 deriv = vec2(0.0);
+    vec2 denominator = vec2(0.0);
     for (int i=0;i<u_numRoots;i++){
-        result = complexMult(result,z-u_roots[i]);
-        vec2 term = vec2(1.0, 0.0);
-        for (int j=0;j<u_numRoots;j++){
-            if (i!=j){
-                term = complexMult(term,z-u_roots[j]);
-            }
-        }
-        deriv += term;
+        denominator += complexReciprocal(z-u_roots[i]);
     }
-    return complexDiv(result, deriv);
+    return complexReciprocal(denominator);
 }
 
 void main(){
     vec2 uv = (gl_FragCoord.xy-u_resolution/2.0)/u_minDimension;
     vec2 z = u_zoomCenter+uv*u_zoomSize;
     int iterCount = 0;
-    vec2 zNext = vec2(0.0);
+    int closestIndex = -1;
     for(int i=0;i<u_iterations;i++){
-        zNext = z - fOverFPrime(z);
-        if (length(zNext-z)<1e-6) break;
-        z = zNext;
-        iterCount = i;
+        z = z - fOverFPrime(z);
+        for (int j=0;j<u_numRoots;j++){
+            if (length(z-u_roots[j])<1e-2){
+                iterCount = i;
+                i = u_iterations;
+                closestIndex = j;
+                break;
+            };
+        }
     }
-    float minDist = distance(z, u_roots[0]); 
-    int closestIndex = 0;
-    for (int i=1;i<u_numRoots;i++){
+    float minDist = distance(z, u_roots[closestIndex]); 
+    for (int i=0;i<u_numRoots;i++){
         float dist = distance(z, u_roots[i]);
         if (dist<minDist){
             minDist = dist;
