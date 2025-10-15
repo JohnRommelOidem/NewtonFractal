@@ -78,7 +78,7 @@ function getNearestColor(z, roots = uniforms.u_roots.value){
     let nearestDistance = Infinity;
     for (let i = 0; i<roots.length;i++){
         const currentDistance = complexDistance(z, roots[i])
-        if (nearestDistance>currentDistance){
+        if (nearestDistance>currentDistance&&currentDistance<5){
             nearestDistance = currentDistance;
             nearestIndex = i;
         }
@@ -88,7 +88,7 @@ function getNearestColor(z, roots = uniforms.u_roots.value){
 
 export default function initTraj(svg, drawState){
     const trajGroup = svg.append("g").attr("class", "traj-layer");
-    const initialPosition = [0.2, 0.3]
+    const initialPosition = [0.2, 0.2]
     function renderTraj(){
         let complexPoints = getIterations(initialPosition, uniforms.u_iterations.value);
         let nearestColor = getNearestColor(complexPoints.at(-1));
