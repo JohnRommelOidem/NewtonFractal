@@ -1,6 +1,5 @@
-import { canvasToComplex, complexToCanvas } from "./state";
 import { interpolateArray } from "d3";
-import { clamp, circleComplex } from "./funcUtils";
+import { clamp, circleComplex, canvasToComplex, complexToCanvas } from "./funcUtils";
 
 export default function initSliders(canvas, uniforms, sliderContent, render, renderCursors, cursorGroup){
     function createSlider(sliderDeets){

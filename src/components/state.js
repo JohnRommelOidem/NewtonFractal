@@ -21,19 +21,3 @@ export const uniforms = {
     u_numRoots:uniformDict("1i",numRoots),
     u_colors:uniformDict("3fv",cursorColorsRgb)
 }
-
-export function complexToCanvas(z, zoomCenter=uniforms.u_zoomCenter.value, zoomSize=uniforms.u_zoomSize.value){
-    const minDimValue = minDimension(canvas);
-    const x = ((z[0]-zoomCenter[0])/zoomSize+0.5)*minDimValue+(canvas.width-minDimValue)/2;
-    const y = (0.5-(z[1]-zoomCenter[1])/zoomSize)*minDimValue+(canvas.height-minDimValue)/2;
-    return [x, y]
-}
-
-export function canvasToComplex(pos, zoomCenter=uniforms.u_zoomCenter.value, zoomSize=uniforms.u_zoomSize.value){
-    const minDimValue = minDimension(canvas);
-    let x = (pos[0]-(canvas.width-minDimValue)/2)/minDimValue;
-    let y = (pos[1]-(canvas.height-minDimValue)/2)/minDimValue;
-    const re = zoomCenter[0] + (x-0.5)*zoomSize;
-    const im = zoomCenter[1] + (0.5-y)*zoomSize;
-    return [re,im]
-}

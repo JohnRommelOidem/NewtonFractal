@@ -1,6 +1,5 @@
 import {scaleLinear, range} from "d3"
-import { complexToCanvas, canvasToComplex } from "./state";
-import { clamp, minDimension, formatLabel } from "./funcUtils";
+import { clamp, minDimension, formatLabel, complexToCanvas, canvasToComplex } from "./funcUtils";
 
 export default function initGrid(canvas, svg, drawState){
     

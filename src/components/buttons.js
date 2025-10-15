@@ -1,6 +1,5 @@
 import { easeExpOut, zoomIdentity, interpolateArray } from "d3"
-import { circleComplex, cursorColors} from "./funcUtils"
-import { complexToCanvas } from "./state"
+import { circleComplex, cursorColors, complexToCanvas } from "./funcUtils"
 export default function initButtons(canvas, svg, uniforms, sliderContent, render, renderGl, renderTraj, backgroundBehaviour, cursorGroup, drawState){
     function createButton(text, eventListener){
         const btn = document.createElement("button")

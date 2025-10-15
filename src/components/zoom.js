@@ -1,7 +1,5 @@
 import {zoom, interpolate, zoomIdentity} from "d3"
-import { minDimension } from "./funcUtils";
-import { complexToCanvas } from "./state";
-
+import { minDimension, complexToCanvas } from "./funcUtils";
 export default function initZoom(canvas, svg, uniforms, zoomSize, renderGrid, renderGl, renderTraj){
     const backgroundBehaviour = zoom()
         .interpolate(interpolate)

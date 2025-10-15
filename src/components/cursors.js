@@ -1,5 +1,5 @@
-import { cursorColors } from "./funcUtils";
-import { uniforms, complexToCanvas, canvasToComplex } from "./state";
+import { cursorColors, complexToCanvas, canvasToComplex } from "./funcUtils";
+import { uniforms } from "./state";
 import {drag, select} from "d3";
 
 export default function initCursors(svg, renderGl, renderTraj, drawState){

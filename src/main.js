@@ -1,13 +1,13 @@
 import * as d3 from "d3"
-import {initGl} from "./webGlUtils"
-import {uniforms} from "./state"
-import initGrid from "./grid"
-import initCursors from "./cursors"
-import initZoom from "./zoom"
-import initSliders from "./sliders"
-import initButtons from "./buttons"
-import initMinimize from "./minimize"
-import initTraj from "./traj"
+import { initGl } from "./webgl/webGlUtils"
+import {uniforms} from "./components/state"
+import initGrid from "./components/grid"
+import initCursors from "./components/cursors"
+import initZoom from "./components/zoom"
+import initSliders from "./components/sliders"
+import initButtons from "./components/buttons"
+import initMinimize from "./components/minimize"
+import initTraj from "./components/traj"
 
 const canvas = document.getElementById("webgl-canvas")
 canvas.width = canvas.clientWidth;
